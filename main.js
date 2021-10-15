@@ -1,45 +1,27 @@
 'use strict'
 
-const upBtn = document.querySelector('.up-button');
-const downBtn = document.querySelector('.down-button');
-const sidebar = document.querySelector('.sidebar');
 const container = document.querySelector('.container');
-const mainSlide = document.querySelector('.main-slide');
-const slidesCount = mainSlide.querySelectorAll('div').length;
+const SQUARE_NUMBER = 499;
 
-let activeSlideIndex = 0;
+for (let i = 0; i < SQUARE_NUMBER; i++) {
+    let square = document.createElement('div');
+    square.classList.add('square');
 
-sidebar.style.top = `-${(slidesCount - 1) * 100}vh`;
+    square.addEventListener('mouseover', setColor);
+    square.addEventListener('mouseleave', removeColor);
 
-upBtn.addEventListener('click', () => {
-    changeSlide('up');
-})
+    container.append(square);
+}
 
-downBtn.addEventListener('click', () => {
-    changeSlide('down');
-})
+function setColor(event) {
+    let element = event.target;
+    let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    element.style.backgroundColor = color;
+    element.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
+}
 
-function changeSlide(direction) {
-    if (direction === 'up') {
-        activeSlideIndex++;
-
-        if (activeSlideIndex === slidesCount) {
-            activeSlideIndex = 0;
-        }
-
-    } else if (direction === 'down') {
-        activeSlideIndex--;
-
-        if (activeSlideIndex < 0) {
-            activeSlideIndex = slidesCount - 1;
-        }
-
-    }
-
-    const height = container.clientHeight;
-
-    mainSlide.style.transform = 
-    `translateY(-${activeSlideIndex * height}px)`;
-    sidebar.style.transform = 
-    `translateY(${activeSlideIndex * height}px)`;
+function removeColor(event) {
+    let element = event.target;
+    element.style.backgroundColor = '#1d1d1d';
+    element.style.boxShadow = `0 0 2px #000`;
 }
