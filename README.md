@@ -8,5 +8,7 @@ Working with DOM and DOM events.
 
 
 1)For cloning repository use command - git clone https://github.com/6nikkyhood9/JS_Marathon.git
+
 2)For view branches in repository use command - git branch -r
+
 3)For switching between branches use command - git checkout 'name of branch'
